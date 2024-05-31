@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar *ngIf="!isSearch">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Listado de Vehiculos</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button [ngClass]="{'dark-mode-button': isDarkMode}" (click)="toggleDarkMode()">
+        <ion-icon name="color-wand"></ion-icon>
+      </ion-button>
+      <ion-button (click)="clickSearch()">
+        <ion-icon slot="end" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar *ngIf="isSearch">
+    <ion-searchbar 
+      show-cancel-button="always" 
+      show-clear-button="always"
+      (ionClear)="clearSearch()" 
+      (ionChange)="buscarSearch($event)">
+    </ion-searchbar>
+  </ion-toolbar>
+  <ion-row class="header-color">
+    <ion-col><strong>Codigo</strong></ion-col>
+    <ion-col><strong>Marca</strong></ion-col>
+    <ion-col><strong>Año</strong></ion-col>
+    <ion-col><strong>Calificacion</strong></ion-col>
+    <ion-col><strong>Nuevo</strong></ion-col>
+    <ion-col><strong>Fecha</strong></ion-col>
+  </ion-row>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    
+
+  <ion-list lines="full">
+    <ion-item [routerLink]="['/vehiculo-edit/' + vehiculo.id]" *ngFor="let vehiculo of listaVehiculos">
+      <ion-label>{{vehiculo.codigo}}</ion-label>
+      <ion-label>{{vehiculo.marca}}</ion-label>
+      <ion-label>{{vehiculo.ano}}</ion-label>
+      <ion-label>{{vehiculo.calificacion}}</ion-label>
+      <ion-label>{{vehiculo.nuevo}}</ion-label>
+      <ion-label>{{formatFecha(vehiculo.fecha)}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" style="margin-right: 16px;">
+    <ion-fab-button [routerLink]="['/vehiculo-edit/new']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

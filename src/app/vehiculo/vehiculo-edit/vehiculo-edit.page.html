@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#">
+      </ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{isNew ? 'Nuevo' : 'Editar'}} Vehiculo</ion-title>
+
+    <ion-buttons slot="primary">
+
+      <ion-button fill="solid" color="success" (click)="guardarVehiculo()">
+        Guardar
+        <ion-icon slot="end" name="save"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="!isNew" fill="solid" (click)="eliminarVehiculo()" color="danger">
+        Borrar
+        <ion-icon slot="end" name="trash"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-grid>
+    <ion-list>
+      <ion-input label="ID#" label-placement="floating" fill="outline" placeholder="Enter text" [(ngModel)]="id"
+        readonly="true" disabled="true">
+      </ion-input>
+      <br>
+      <ion-input type="number" label="Código" label-placement="floating" fill="outline" placeholder="Enter text"
+        [(ngModel)]="vehiculo.codigo">
+      </ion-input>
+      <br>
+      <ion-input label="Marca" label-placement="floating" fill="outline" placeholder="Enter text"
+        [(ngModel)]="vehiculo.marca">
+      </ion-input>
+      <br>
+      <ion-input label="Año" label-placement="floating" fill="outline" placeholder="Enter text"
+        [(ngModel)]="vehiculo.ano">
+      </ion-input>
+      <br>
+      <ion-input label="Calificacion" type="number" min="1" max="5" label-placement="floating" fill="outline" placeholder="Enter text"
+        [(ngModel)]="vehiculo.calificacion">
+      </ion-input>
+      <br>
+      <ion-item>
+        <ion-label>Nuevo</ion-label>
+        <ion-toggle [(ngModel)]="vehiculo.nuevo"></ion-toggle>
+      </ion-item>
+      <br>
+      <ion-input type="date" label="Fecha" label-placement="floating" fill="outline" placeholder="Enter text"
+        [(ngModel)]="vehiculo.fecha">
+      </ion-input>
+    </ion-list>
+  </ion-grid>
+</ion-content>
